@@ -1,0 +1,91 @@
+<style>
+    
+</style>
+<script language='javascript'>
+    'use strict';
+    var sharePrices = sharePrices || {};
+    sharePrices.functions = (function() {
+        function registerInMDS() {
+             getSharePrice();
+        }
+        function mdsWait() {
+            SP.SOD.executeOrDelayUntilEventNotified(getSharePrice, 'sp.bodyloaded');
+        }
+
+        function formatDate(date) {
+            return String.format('{0:dd}-{0:MM}-{0:yyyy}',new Date(date));
+        }
+
+        function getSharePrice() {
+            try {
+                var widgetsCssLoaded =  jQuery('link[href*="css_babcockmobilewidgets.css"]').length;
+                if (widgetsCssLoaded < 1) {
+                    var corecss = document.createElement('link');
+                    corecss.href = _spPageContextInfo.siteServerRelativeUrl + '/_catalogs/masterpage/Enhancements/mobile/css_babcockmobilewidgets.css';
+                    corecss.type = 'text/css';
+                    corecss.rel = 'stylesheet';
+                    jQuery('head').append(corecss);
+                }
+
+                var selectFields = 'Title,Change,Price,UpdatedOn';
+                jQuery.ajax({
+                    url: getSiteUrl() + '/_api/web/lists/getbytitle(\'Share prices\')/items?$filter=Title eq \'BAB.L\'&$select=' + selectFields + '&$top=1',
+                    method: 'GET',
+                    headers: { 'accept': 'application/json;odata=verbose' },
+                    success: getSharePriceSuccess,
+                    error: getSharePriceError
+                });
+            }
+            catch(err) {
+                initJSError('getSharePrice()', err);
+            }
+        }
+        function getSharePriceSuccess(data) {
+            try {
+                if (data.d.results.length > 0) { 
+                    var item = data.d.results[0];
+                    var compiledHTML = String.format('<div><div><div id="connect-shareprice-text">Share price</div><div id="connect-shareprice-title">{0}</div></div><div id="connect-shareprice-date">{1}</div><div id="connect-shareprice-value">{2}</div><div id="connect-shareprice-change">{3}</div></div>',item.Title, formatDate(item.UpdatedOn), item.Price, item.Change);
+                    jQuery('#connect-shareprice-container').html(compiledHTML);
+                }
+                
+            }
+            catch(err) {
+                initJSError('getSharePriceSuccess()', err);
+            }
+        }
+        function getSharePriceError(xhr, status, error) {          
+                initJSError('getSharePriceError()', err);
+        }
+        function getSiteUrl() {
+            try {
+                return _spPageContextInfo.siteAbsoluteUrl;
+            }
+            catch(err) {
+                initJSError('getSiteUrl()', err);
+            }
+        }
+        function initJSError(fName, err) {
+            if (typeof console != "undefined") { 
+                console.log('Error in function: ' + fName + '. Message: ' + err); 
+            }
+        }
+        function emptyAndAppend(area, value, empty) {
+            if (empty) { jQuery(area).empty(); }
+            jQuery(area).append(value);
+        }
+        return {
+            registerInMDS: registerInMDS,
+            mdsWait: mdsWait,
+            getSharePrice: getSharePrice
+        };
+    })();
+    if ('undefined' !== typeof g_MinimalDownload && g_MinimalDownload && (window.location.pathname.toLowerCase()).endsWith('/_layouts/15/start.aspx') && 'undefined' !== typeof asyncDeltaManager) {
+        _spBodyOnLoadFunctionNames.push('sharePrices.functions.registerInMDS');
+    } else {
+        _spBodyOnLoadFunctionNames.push('sharePrices.functions.getSharePrice');
+    }
+</script>
+<div class="row justify-content-center" id="connect-shareprice-row">
+    <div id="connect-shareprice-container" class="col-xs-12 col-sm-6 col-sm-offset-3"></div>
+</div>
+

@@ -1,0 +1,89 @@
+<script language="javascript">
+
+	var externalnews = externalnews || {};
+	externalnews.functions = (function() {
+		function registerInMDS() {
+	  //      RegisterModuleInit(_spPageContextInfo.siteServerRelativeUrl + '/_catalogs/masterpage/Enhancements/enhanceexternalnews.js', externalnews.functions.mdsWait);
+	        loadExternalNews();
+    }
+    function mdsWait() {
+        SP.SOD.executeOrDelayUntilEventNotified(loadExternalNews, 'sp.bodyloaded');
+    }
+    
+    function formatDate(date) {
+    	return String.format('{0:dd}-{0:MM}-{0:yyyy}',new Date(date));
+    }
+		function loadExternalNews()
+		{
+			try
+			{
+				var selectFields = 'Title,NewsLink,NewsImage,NewsComments,NewsSource,NewsDate';
+				jQuery.ajax({
+					url: getWebUrl() + '/_api/web/lists/getbytitle(\'External News\')/items?$select=' + selectFields + '&$orderby=NewsDate desc&$top=5',
+					method: 'GET',
+					headers: { 'accept': 'application/json;odata=verbose' },
+					success: loadExternalNewsSuccess,
+					error: loadExternalNewsError
+				});
+			}
+			catch(err) {
+				initJSError('loadExternalNews()', err);
+			}
+		}
+		function loadExternalNewsSuccess(data) {
+			try {
+				emptyAndAppend('#connect-internetnews-container', '', true);
+				jQuery.each(data.d.results, function(index, item){
+					var compiledHTML = String.format('<a href="{0}" class="connect-internetnews-item" style="background-image:url(\'{1}\');" title="{2}" target="_new"><div class="connect-internetnews-title">{3}<div class="connect-internetnews-info">{4} <span>{5}</span></div></div></a>',item.NewsLink, item.NewsImage, item.NewsComments, item.Title, formatDate(item.NewsDate), item.NewsSource);
+					jQuery('#connect-internetnews-container').append(compiledHTML);
+			});
+			}
+			catch(err) {
+				initJSError('loadExternalNewsSuccess()', err);
+			}
+		}
+		function loadExternalNewsError(err) {
+				initJSError('loadExternalNewsError()', err);
+		}
+		
+		function getWebUrl() {
+			try {
+				if (_spPageContextInfo.webServerRelativeUrl === '/') { return ''; } else { return _spPageContextInfo.webServerRelativeUrl; }
+			}
+			catch(err) {
+				initJSError('getWebUrl()', err);
+			}
+		}
+		function initJSError(fName, err) {	
+			if (typeof console != "undefined") { 
+        console.log('Error in function: ' + fName + '. Message: ' + err); 
+      }
+		}
+		function emptyAndAppend(area, value, empty) {
+			if (empty) { jQuery(area).empty(); }
+			jQuery(area).append(value);
+		}
+		return {
+			registerInMDS: registerInMDS,
+			mdsWait: mdsWait,
+			loadExternalNews: loadExternalNews
+		};
+	})();
+	if ('undefined' !== typeof g_MinimalDownload && g_MinimalDownload && (window.location.pathname.toLowerCase()).endsWith('/_layouts/15/start.aspx') && 'undefined' !== typeof asyncDeltaManager) {
+	    _spBodyOnLoadFunctionNames.push('externalnews.functions.registerInMDS');
+	} else {
+	    _spBodyOnLoadFunctionNames.push('externalnews.functions.loadExternalNews');
+	}
+
+
+</script>
+						
+<div id="connect-internetnews-container"></div>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"><head>
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:k921873de87b47daa658cfde2b849fa6 msdt:dt="string">UNCLASSIFIED|70464464-4d46-4e40-8080-ccda3b5040d9</mso:k921873de87b47daa658cfde2b849fa6>
+<mso:TaxCatchAll msdt:dt="string">1;#UNCLASSIFIED</mso:TaxCatchAll>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>

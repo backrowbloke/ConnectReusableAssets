@@ -1,0 +1,161 @@
+<style>
+	#connect-splashbanner-container {
+    margin-top:-2px;
+    width:auto;
+	}
+	.connect-splashbanner-item {
+    position:relative;
+    display:block;
+    margin:0px 0px 5px 0px;
+    height:150px;
+    background-position:100% 50%;
+    background-size:cover;
+    background-color:#666;
+    text-decoration:none;
+    }
+a.connect-splashbanner-item:hover {
+    text-decoration:none;
+    }
+.connect-splashbanner-title {
+    font-size:13px;
+    bottom:0;
+    width:100%;
+    position:absolute;
+    /*background:rgba(0,0,0,0.6);*/
+    background:rgba(12,73,156,0.7);
+    color:#FFF;
+    margin:0;
+    padding:5px;
+    box-sizing:border-box;
+    height:75px;
+    overflow-y:hidden;
+    }
+.connect-splashbanner-info {
+    font-size:11px;
+    text-align:right;
+    margin-top:5px;
+    }
+.connect-splashbanner-info span {
+    color:#FFFFFF;
+    padding:1px 2px 1px 2px;
+    display:inline-block;
+    }
+   .connect-splashbanner-title h1, .connect-splashbanner-title h2, .connect-splashbanner-title h3{
+   	color:#ffffff;
+  }
+    
+</style>
+
+<script language="javascript">
+	
+	//as this may be on a generic page, write the css link to the header
+	//var cssLink = String.format('<link rel="stylesheet" href="{0}/_catalogs/masterpage/Enhancements/css_babcockportalhome.css" type="text/css"/>',_spPageContextInfo.siteServerRelativeUrl);
+
+	var splashpanel_filtered = splashpanel_filtered || {};
+	splashpanel_filtered.functions = (function() {
+		//filters
+		//list name
+		var listName = "Category Banners";
+		//the querystring name
+		var queryString = 'SiteMapTitle';
+		//the column name in this list to filter on (lookup to another list)
+		var filterField = 'CommunityCategory'
+		//the field linked to th elookup
+		var lookupListFieldFieldName = 'Title'
+		
+		function registerInMDS() {
+	  //      RegisterModuleInit(_spPageContextInfo.siteServerRelativeUrl + '/_catalogs/masterpage/Enhancements/enhancesplashpanel_filtered.js', splashpanel_filtered.functions.mdsWait);
+	        loadSplashPanel();
+    }
+    function mdsWait() {
+        SP.SOD.executeOrDelayUntilEventNotified(loadSplashPanel, 'sp.bodyloaded');
+    }
+    
+    function formatDate(date) {
+    	return String.format('{0:dd}-{0:MM}-{0:yyyy}',new Date(date));
+    }
+    
+    ///get query string parameter
+		function getParameterByName(name) {
+		    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+		    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
+		                results = regex.exec(location.search);
+		    return results == null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+		}
+		
+		function loadSplashPanel()
+		{
+			try
+			{
+				var expandField = String.format('{0}/{1}',filterField, lookupListFieldFieldName);
+				var selectFields = String.format('Title,Image,CommunityDescription,{0}',expandField);
+				var filterQuery = String.format("{0} eq '{1}'",expandField, getParameterByName(queryString));
+				var targetUrl = String.format('{0}/_api/web/lists/getbytitle(\'{4}\')/items?$select={1}&$expand={2}&$filter={3}',getWebUrl(),selectFields, filterField,filterQuery, listName);
+				
+						jQuery.ajax({
+					url: targetUrl,
+					method: 'GET',
+					headers: { 'accept': 'application/json;odata=verbose' },
+					success: loadSplashPanelSuccess,
+					error: loadSplashPanelError
+				});
+			}
+			catch(err) {
+				initJSError('loadSplashPanel()', err);
+			}
+		}
+		function loadSplashPanelSuccess(data) {
+			try {
+				emptyAndAppend('#connect-splashbanner-container', '', true);
+				if (data.d.results.length > 0) {
+					jQuery.each(data.d.results, function(index, item){
+						var compiledHTML = String.format('<a href="#" class="connect-splashbanner-item" style="background-image:url(\'{0}\'); background-color:#0080c9; cursor:default;" title="{2}"><div class="connect-splashbanner-title"><h2>{2}</h2>{1}</div></a>',item.Image, item.CommunityDescription, getParameterByName(queryString));
+						jQuery('#connect-splashbanner-container').append(compiledHTML);
+					});
+				}
+				else {
+					var compiledHTML =String.format('<a href="#" class="connect-splashbanner-item" style=" background-color:#0080c9;  cursor:default;" title="No Image"><div class="connect-splashbanner-title"><h2>{0}</h2></div></a>', getParameterByName(queryString));
+					jQuery('#connect-splashbanner-container').append(compiledHTML);
+				}
+			}
+			catch(err) {
+				initJSError('loadSplashPanelSuccess()', err);
+			}
+		}
+		function loadSplashPanelError(err) {
+				initJSError('loadSplashPanelError()', err);
+		}
+		
+		function getWebUrl() {
+			try {
+				if (_spPageContextInfo.webServerRelativeUrl === '/') { return ''; } else { return _spPageContextInfo.webServerRelativeUrl; }
+			}
+			catch(err) {
+				initJSError('getWebUrl()', err);
+			}
+		}
+		function initJSError(fName, err) {	
+			if (typeof console != "undefined") { 
+        console.log('Error in function: ' + fName + '. Message: ' + err); 
+      }
+		}
+		function emptyAndAppend(area, value, empty) {
+			if (empty) { jQuery(area).empty(); }
+			jQuery(area).append(value);
+		}
+		return {
+			registerInMDS: registerInMDS,
+			mdsWait: mdsWait,
+			loadSplashPanel: loadSplashPanel
+		};
+	})();
+	if ('undefined' !== typeof g_MinimalDownload && g_MinimalDownload && (window.location.pathname.toLowerCase()).endsWith('/_layouts/15/start.aspx') && 'undefined' !== typeof asyncDeltaManager) {
+	    _spBodyOnLoadFunctionNames.push('splashpanel_filtered.functions.registerInMDS');
+	} else {
+	    _spBodyOnLoadFunctionNames.push('splashpanel_filtered.functions.loadSplashPanel');
+	}
+
+
+</script>
+						
+<div id="connect-splashbanner-container"></div>

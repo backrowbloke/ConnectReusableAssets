@@ -1,0 +1,119 @@
+<style>
+    
+</style>
+<script language='javascript'>
+    var mobileappslinks = mobileappslinks || {};
+	mobileappslinks.functions = (function() {
+        function registerInMDS() {
+	        loadAppsLinks();
+        }
+        function mdsWait() {
+            SP.SOD.executeOrDelayUntilEventNotified(loadAppsLinks, 'sp.bodyloaded');
+        }
+        
+        function formatDate(date) {
+            return String.format('{0:dd}-{0:MM}-{0:yyyy}',new Date(date));
+        }
+
+        function loadAppsLinksFromList(){
+            try {
+                var widgetsCssLoaded =  jQuery('link[href*="css_babcockmobilewidgets.css"]').length;
+                if (widgetsCssLoaded < 1) {
+                    var corecss = document.createElement('link');
+                    corecss.href = _spPageContextInfo.siteServerRelativeUrl + '/_catalogs/masterpage/Enhancements/mobile/css_babcockmobilewidgets.css';
+                    corecss.type = 'text/css';
+                    corecss.rel = 'stylesheet';
+                    jQuery('head').append(corecss);
+                }
+
+                var targetUrl = String.format('{0}/_api/web/lists/getbytitle(\'Connect%20Apps\')/items?$orderby=Priority asc&$top=6&$filter=(ForcePinned eq 1 and Enabled eq 1)',getWebUrl());
+                jQuery.ajax({
+                    url: targetUrl,
+                    method: 'GET',
+                    headers: { 'accept': 'application/json;odata=verbose' },
+                    success: loadAppsLinksFromListSuccess,
+                    error: loadAppsLinksFromListError
+                });
+            }
+            catch(err) {
+				initJSError('loadAppsLinksFromList()', err);
+			}
+
+        }
+
+        function loadAppsLinksFromListSuccess(data){
+            try{
+                if (data.d.results.length > 0) {
+                    var appHtml = '';
+					jQuery.each(data.d.results, function(index, item){
+                        var indexFloat = index / 2;
+                        var checkOddEven = indexFloat.toString().indexOf('.');
+                        var containerId = 'appitem_'+ item.Id;
+                        var pictureContainerId = 'appitemimage_' + item.Id;
+                        
+                        var compiledHtml = String.format('<div class="col-xs-6 col-sm-4 col-md-2"><div class="connect-mobile-app" id="{0}" style="background-color:{5}"><a href="{4}" ><img src="{1}" class="connect-mobile-app-icon"/><div class="connect-mobile-app-title">{2}</div><div class="connect-mobile-app-info">{3}</div></a></div></div>', containerId, item.IconUrl, item.Title, item.ToolTip, item.Url, item.BackgroundColour );
+
+                        // if (checkOddEven < 0) {
+                        //     appHtml += '<div class="row connect-mobile-app-row">' + compiledHtml;
+                        // }
+                        // else
+                        // {
+                        //     appHtml += compiledHtml + "</div>";
+                        // }
+                        
+                        appHtml += compiledHtml;
+                    });
+                    jQuery('#connect-promotedapps-container').append(appHtml);
+                }
+            }
+            catch(err) {
+				initJSError('loadAppsLinksFromListSuccess()', err);
+			}
+        }
+
+        function loadAppsLinksFromListError(err) {
+				initJSError('loadAppsLinksError()', err);
+		}
+
+        function getWebUrl() {
+			try {
+				if (_spPageContextInfo.webServerRelativeUrl === '/') { 
+                    return ''; 
+                } 
+                else { 
+                    return _spPageContextInfo.webServerRelativeUrl; 
+                }
+			}
+			catch(err) {
+				initJSError('getWebUrl()', err);
+			}
+		}
+
+        function initJSError(fName, err) {	
+			if (typeof console != "undefined") { 
+                console.log('Error in function: ' + fName + '. Message: ' + err); 
+            }
+		}
+		function emptyAndAppend(area, value, empty) {
+			if (empty) { jQuery(area).empty(); }
+			jQuery(area).append(value);
+		}
+
+        return {
+			registerInMDS: registerInMDS,
+			mdsWait: mdsWait,
+			loadAppsLinksFromList: loadAppsLinksFromList
+		}
+    })();
+    if ('undefined' !== typeof g_MinimalDownload && g_MinimalDownload && (window.location.pathname.toLowerCase()).endsWith('/_layouts/15/start.aspx') && 'undefined' !== typeof asyncDeltaManager) {
+	    _spBodyOnLoadFunctionNames.push('mobileappslinks.functions.registerInMDS');
+    } 
+    else {
+	    _spBodyOnLoadFunctionNames.push('mobileappslinks.functions.loadAppsLinksFromList');
+	}
+</script>
+
+<div id="connect-promotedapps-container" class="row">
+
+</div>
+

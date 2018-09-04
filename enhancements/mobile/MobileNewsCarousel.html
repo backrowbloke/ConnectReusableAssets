@@ -1,0 +1,134 @@
+<script language='javascript'>
+    var mobilenewscarousel = mobilenewscarousel || {};
+	mobilenewscarousel.functions = (function() {
+        function registerInMDS() {
+	        loadExternalNews();
+        }
+        function mdsWait() {
+            SP.SOD.executeOrDelayUntilEventNotified(loadExternalNews, 'sp.bodyloaded');
+        }
+        
+        function formatDate(date) {
+            return String.format('{0:dd}-{0:MM}-{0:yyyy}',new Date(date));
+        }
+
+        function loadNewsFromSync(){
+            try {
+                var sliderCssLoaded =  jQuery('link[href*="jquery.bxslider.css"]').length;
+                if (sliderCssLoaded < 1) {
+                    var corecss = document.createElement('link');
+                    corecss.href = _spPageContextInfo.siteServerRelativeUrl + '/_catalogs/masterpage/Enhancements/jquery.bxslider.css';
+                    corecss.type = 'text/css';
+                    corecss.rel = 'stylesheet';
+                    jQuery('head').append(corecss);
+                }
+
+                var widgetsCssLoaded =  jQuery('link[href*="css_babcockmobilewidgets.css"]').length;
+                if (widgetsCssLoaded < 1) {
+                    var corecss = document.createElement('link');
+                    corecss.href = _spPageContextInfo.siteServerRelativeUrl + '/_catalogs/masterpage/Enhancements/mobile/css_babcockmobilewidgets.css?v=1';
+                    corecss.type = 'text/css';
+                    corecss.rel = 'stylesheet';
+                    jQuery('head').append(corecss);
+                }
+
+                var script = document.createElement('script');
+                script.src = _spPageContextInfo.siteServerRelativeUrl + '/_catalogs/masterpage/Enhancements/bxsliderdotmin.js';
+                script.type = 'text/javascript';
+                jQuery('head').append(script);
+
+                var targetUrl = String.format('{0}/_api/web/lists/getbytitle(\'Babcock News Sync\')/items?$orderby=nsStartDate desc&$top=5',getWebUrl());
+                jQuery.ajax({
+                    url: targetUrl,
+                    method: 'GET',
+                    headers: { 'accept': 'application/json;odata=verbose' },
+                    success: loadNewsFromSyncSuccess,
+                    error: loadNewsFromSyncError
+                });
+            }
+            catch(err) {
+				initJSError('loadNewsFromSync()', err);
+			}
+
+        }
+
+        function loadNewsFromSyncSuccess(data){
+            try{
+                if (data.d.results.length > 0) {
+					jQuery.each(data.d.results, function(index, item){
+                        var containerId = 'newsitem_'+ item.Id;
+                        var pictureContainerId = 'newsitemimage_' + item.Id;
+                        var filterClass = item.nsFilter.replace(/&/g,'');
+                        filterClass = filterClass.replace(/\s/g,'_');
+                        var compiledHtml = String.format('<div class="connect-featurednews-item" id="{0}"><div class="connect-featurednews-image" id="{1}" style="display:inline-flex"><img src="{2}" class=""/></div><div class="connect-featurednews-content"><div class="connect-featurednews-contenttext"><div class="connect-featurednews-tag connect-featurednews-tag-{7}">{6}</div><h1>{3}</h1><p>{4}</p></div><div class="connect-featurednews-contentlink"><a href="{5}" title="Read More" target="_blank">Read More</a></div></div></div>', containerId, pictureContainerId, item.nsImage, item.Title, item.nsComments, item.nsLink, item.nsFilter, item.nsType );
+                        
+                        jQuery('#connect-featurednews-container').append(compiledHtml);
+                    });
+                    jQuery('#connect-featurednews-container').bxSlider({
+                        responsive:true,
+                        auto:true,
+                        autoDelay: 20000,
+                        mode: 'fade',
+                        speed: 500,
+                        pause: 10000,
+                        controls: true,
+                        autoHover: true
+	                });
+                }
+            }
+            catch(err) {
+				initJSError('loadNewsFromSyncSuccess()', err);
+			}
+        }
+
+        function loadNewsFromSyncError(err) {
+				initJSError('loadExternalNewsError()', err);
+		}
+
+        function getWebUrl() {
+			try {
+				if (_spPageContextInfo.webServerRelativeUrl === '/') { 
+                    return ''; 
+                } 
+                else { 
+                    return _spPageContextInfo.webServerRelativeUrl; 
+                }
+			}
+			catch(err) {
+				initJSError('getWebUrl()', err);
+			}
+		}
+
+        function initJSError(fName, err) {	
+			if (typeof console != "undefined") { 
+                console.log('Error in function: ' + fName + '. Message: ' + err); 
+            }
+		}
+		function emptyAndAppend(area, value, empty) {
+			if (empty) { jQuery(area).empty(); }
+			jQuery(area).append(value);
+		}
+
+        return {
+			registerInMDS: registerInMDS,
+			mdsWait: mdsWait,
+			loadNewsFromSync: loadNewsFromSync
+		}
+    })();
+    if ('undefined' !== typeof g_MinimalDownload && g_MinimalDownload && (window.location.pathname.toLowerCase()).endsWith('/_layouts/15/start.aspx') && 'undefined' !== typeof asyncDeltaManager) {
+	    _spBodyOnLoadFunctionNames.push('mobilenewscarousel.functions.registerInMDS');
+    } 
+    else {
+	    _spBodyOnLoadFunctionNames.push('mobilenewscarousel.functions.loadNewsFromSync');
+	}
+</script>
+<div class='row connect-mobile-newsrow'>
+    <div class='col-xs-12 col-sm-8 col-sm-offset-2'>
+        <div id='connect-featurednews-container'></div>
+    </div>
+</div>
+
+
+
+</div>
+

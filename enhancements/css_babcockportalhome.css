@@ -1,0 +1,523 @@
+
+
+#pageTitle {
+    display:none;
+    }
+    /*GPJ - not hiding the side nav
+#sideNavBox {
+    /*display:none;*/
+    }
+#contentBox {
+    margin-left:0px;
+    margin-right:0px;
+    }
+#contentBox a:visited, #contentBox a:hover {
+    color: #000 ;
+}
+
+#s4-titlerow {
+    margin-bottom:0 !important;
+    }
+.connect-homepage-main {
+    padding:10px 0 0 0;
+    margin:0;
+    }
+.connect-homepage-left {
+    padding:0;
+    margin:0;
+    width:700px;
+    float:left
+    }
+.connect-homepage-right {
+    padding:0;
+    margin:0;
+    width:225px;
+    float:right;
+    }
+.connect-homepage-right .ms-webpartzone-cell {
+    background:#e6ecf5;
+    padding:7px;
+    }
+.connect-homepage-subfeatured {
+    padding:0;
+    margin:0;
+    }
+.connect-homepage-footer {
+    clear:both;
+    }
+.connect-homepage-column:first-child{
+    margin-left:0;
+    }
+.connect-homepage-column {
+    background:#E6F2FA;
+    padding:0;
+    margin:0;
+    width:220px;
+    margin-left:20px;
+    float:left;
+    padding:5px;
+    box-sizing:border-box;
+    overflow:hidden;
+    }
+    
+ .connect-homepage-column-wide {
+    width:340px;
+    }
+/* HANDLEBARS ERROR AND TRACING */
+#connect-shareprice-error, #connect-localnews-error, #connect-featurednews-error, #connect-internetnews-error, #connect-campaigns-error, #connect-appsview-error, #connect-reportsview-error, #connect-pinnedview-error {
+    color:red;
+    }
+#connect-shareprice-trace, #connect-localnews-trace, #connect-featurednews-trace, #connect-internetnews-trace, #connect-campaigns-trace, #connect-appsview-trace, #connect-reportsview-trace, #connect-pinnedview-trace {
+    border:1px solid purple;
+    color:purple;
+    display:none;
+    }
+/* SHAREPRICE */
+#connect-shareprice-container {
+    background:#E71F85;
+    color:#FFFFFF;
+    padding:10px 10px 10px 70px;
+    background-image:url('images/shareprice.png');
+    background-position:-15px 50%;
+    background-repeat:no-repeat;
+    background-size:100px;	
+    }
+#connect-shareprice-container div {
+    display:inline-block;
+    }
+#connect-shareprice-text {
+    font-size:1.46em;	
+    font-weight: 600;
+	}
+#connect-shareprice-title, #connect-shareprice-date {
+    font-size:11px;
+	}
+#connect-shareprice-value {
+    font-size:2em;
+	}
+#connect-shareprice-change {
+    font-size:18px;
+	}
+/* WEBSITE LINK */
+#connect-website-panel {
+    background:#59787A;
+	color:#FFFFFF;
+    padding:10px 10px 10px 70px;
+	background-image:url('/Tiles/BabcockLogo_T128.png');
+	background-position:-15px 50%;
+	background-repeat:no-repeat;
+	background-size:100px;	
+	text-decoration:none;
+	margin: 20px 0 0 0;
+	display:block;
+	}
+#connect-website-panel:visited {
+    color:#FFFFFF !important;
+    }
+#connect-website-url {
+	font-size: 11px;
+	font-weight:normal;
+    letter-spacing:-0.2px;
+    }
+#connect-shareprice-text, #connect-website-text {
+    font-size:1.46em;	
+    font-weight: 600;
+    line-height: 1.2em;
+	}
+/* LOCAL NEWS, INTERNET NEWS AND CAMPAIGN */
+#connect-internetnews-container,
+#connect-localnews-container {
+    margin-top:5px;
+	}
+
+.connect-localnews-item,
+.connect-internetnews-item {
+    position:relative;
+    display:block;
+    margin:0px 0px 5px 0px;
+    height:150px;
+    background-position:50% 50%;
+    background-size:cover;
+    background-color:#666;
+    text-decoration:none;
+    }
+a.connect-localnews-item:hover,
+a.connect-internetnews-item:hover,
+a.connect-campaigns-item:hover {
+    text-decoration:none;
+    }
+.connect-localnews-title,
+.connect-internetnews-title,
+.connect-campaigns-title {
+    font-size:13px;
+    bottom:0;
+    width:100%;
+    position:absolute;
+    background:rgba(0,0,0,0.6);
+    color:#FFF;
+    margin:0;
+    padding:5px;
+    box-sizing:border-box;
+    }
+.connect-localnews-info,
+.connect-internetnews-info {
+    font-size:11px;
+    text-align:right;
+    margin-top:5px;
+    }
+.connect-localnews-info span,
+.connect-internetnews-info span {
+    color:#FFFFFF;
+    padding:1px 2px 1px 2px;
+    display:inline-block;
+    }
+.connect-localnews-info span {
+    background-color:#e71f85;	
+    }
+.connect-internetnews-info span {
+    background-color:#ffd000;
+    }
+.connect-campaigns-item {
+    position:relative;
+    display:block;
+    width:225px;
+    margin:0 0 20px 0;
+    background-position:50% 0;
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-color: #666;
+    }	
+.connect-campaigns-item-standard {
+    height: 70px;
+    }
+.connect-campaigns-item-large {
+    height: 160px;
+    }
+.connect-campaigns-item-xlarge {
+    height: 250px;
+    }
+
+.connect-homepage-cbslist {
+    width:215px;
+    display:inline-block !important;
+    }
+/*Promoted Links WP*/
+div.ms-promlink-header {
+    display:none;
+    }
+div.ms-promlink-body {
+    width:220px;
+    }
+/* Reduced size tiles */
+/*  tile row height */
+    div.ms-promlink-body {
+    height:100px;
+    }
+/*  tile dimensions, including inter-tile margin */
+    div.ms-tileview-tile-root {
+    width:105px !important;
+    height:105px !important;
+    }
+/*  tile and title( + description) overlay dimensions */
+div.ms-tileview-tile-content, div.ms-tileview-tile-detailsBox {
+    width:99px !important;
+    height:99px !important;
+    }
+/*  tile background image dimensions */
+div.ms-tileview-tile-content > a > img {
+    width:100% !important;
+    height:100% !important;
+    }
+/*  title and description text  */
+ul.ms-tileview-tile-detailsListMedium {
+    height:100px;
+    padding:4px 7px 7px;
+    font-size:11px;
+    line-height:14px;
+    }
+/*  description text class  */
+li.ms-tileview-tile-descriptionMedium {
+    padding-top:10px;
+    padding-left:2px;
+    font-size:11px;
+    }
+/*  title text when description not shown  */
+div.ms-tileview-tile-titleTextMediumCollapsed {
+    background-color:rgba(0, 0, 0, 0.6);
+    width:86px;
+    height:29px;
+    position:absolute;
+    top:-33px;
+    left:0px;
+    padding:4px 7px 0px 8px;
+    font-size:11px;
+    line-height:13px;
+    }
+.ms-tileview-tile-content img{
+    width:100px!important; 
+    height:100px!important;
+    }
+/* Custom Apps and Reports Views */
+#connect-appsview-container,
+#connect-reportsview-container,
+#connect-pinnedview-container, 
+#connect-appsview-containerPinned, 
+#connect-reportsview-containerPinned,
+#connect-appsview-containerSearch,
+#connect-reportsview-containerSearch {
+	border: 0;
+	position:relative;
+	line-height:1em;
+	padding: 0px 6px;
+	border: 1px solid #FFF;
+	}
+#connect-appsview-containerPinned,
+#connect-reportsview-containerPinned {
+	background: #E6ECF5;
+	margin-top: 0;
+	border-color: #CEDAEB;
+	border-top: 0;
+	}
+#connect-appsview-containerSearch,
+#connect-reportsview-containerSearch {
+	padding: 10px;
+	background: #E6ECF5;
+	margin-bottom: 0;
+	border-color: #CEDAEB;
+	border-bottom: 0;
+    }
+#connect-appsview-search::-ms-clear,
+#connect-reportsview-search::-ms-clear{ 
+    display: none;
+    }
+#connect-appsview-data, 
+#connect-reportsview-data,
+#connect-pinnedview-data {
+	border: 1px solid green;
+	color: green;
+	display:none;
+	}
+.tile-link {
+	border:0;
+	padding:0;
+	margin: 0 5px 5px 0;
+	display:inline-block;
+	}
+.tile-link:first-child {
+	margin-top: 10px;
+    }
+.tile {
+    height: 100px;
+    background-color: #0C499C;
+    width: 100px;
+    font-family: "Segoe UI","Segoe",Tahoma,Helvetica,Arial,sans-serif;
+    font-size: 11px;
+	display:inline-block;
+	border: 0;
+	padding: 0;
+    }
+.tile-content {
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    position: relative;
+    }
+.detailBox {
+    background-color: rgba(0,0,0,0.6);
+    color: #fff;
+    left:0px;
+    top:142px;
+    top:67px;
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    transition-property: top;
+    -webkit-transition-property: top;
+    transition-timing-function: ease;
+    -webkit-transition-timing-function: ease;
+    transition-duration: 0.15s;
+    -webkit-transition-duration: 0.15s;
+    }
+.tile-details {
+    list-style-type: none;
+    margin: 0px;
+    overflow: hidden;
+    padding-top: 4px;
+    padding-bottom: 6px;
+    padding-left:4px;
+    padding-right:1px;
+    line-height:13px;
+    }
+.tile-title {
+    border-spacing:0px;
+    display: inline-block;
+	height:27px;
+    overflow:hidden;
+    color:#fff;
+    padding-left:4px;
+    padding-right:4px;
+    }
+.tile-description {
+    border-spacing: 0px;
+    list-style-type:none;
+    padding-left:4px;
+    padding-right:4px;
+    }
+.tile-image {
+    position:relative;
+    height: 100px;
+    }
+.tile-title-text {
+    max-height:52px;
+    overflow:hidden;
+    list-style-type:none;
+    }
+.tile-link:hover .detailBox {
+    top:0;
+    transition-property: top;
+    -webkit-transition-property: top;
+    transition-timing-function: ease;
+    -webkit-transition-timing-function: ease;
+    transition-duration: 0.25s;
+    -webkit-transition-duration: 0.25s;
+    }
+.tile-pin {
+	background-color: #333;
+	position:absolute;
+	bottom: 0;
+	right: 0;
+	background-image: url("/_catalogs/masterpage/APResources/Brand/spcommon_b002.png");
+	background-position: 36px 221px ;
+	width:18px;
+	height:18px;
+	}
+.tile-pin-force {
+	background-image: url("/_catalogs/masterpage/APResources/Brand/spcommon_b_b002.png");
+	background-position: 72px 239px;
+    }
+.tile-pin-unpin {
+	background-position: 75px 149px;
+    }
+#connect-pinnedview-container a:nth-child(even) {
+   margin: 0 -1px 5px 0;
+ 	}
+.connect-pinnedview-links a, .connect-pinnedview-links a:visited {
+   display:block;
+   padding: 6px 5px !important;
+   margin: 5px 0 !important;
+   background: #0c499c;
+   color: #FFF !important;
+   font-size: 0.85em;
+   text-transform: uppercase;
+   }
+.connect-pinnedview-links a:hover {
+   text-decoration: underline;
+   }
+.tile-rpt:before,
+#connect-reportsview-container .tile-content:before,
+#connect-reportsview-containerPinned .tile-content:before {
+   content: '';
+   position: absolute;
+   top: 0;
+   right: 0;
+   border-top: 20px solid #fff;
+   border-left: 20px solid rgba(255, 255, 255, 0.5);
+   width: 0;
+   }
+#connect-pinnedview-container .tile-rpt:before, 
+#connect-reportsview-containerPinned .tile-content:before {
+   border-top-color: #e6ecf5;
+   }
+#s4-workspace {
+	overflow-y: scroll;
+    }
+    
+   
+/*left tiles larger size*/
+/*  tile row height */
+.webpartleft div.ms-promlink-body {
+    height:100px;
+    }
+/*  tile dimensions, including inter-tile margin */
+.webpartleft div.ms-tileview-tile-root {
+    width:205px !important;
+    height:105px !important;
+    }
+/*  tile and title( + description) overlay dimensions */
+.webpartleft div.ms-tileview-tile-content, div.ms-tileview-tile-detailsBox {
+    width:99px !important;
+    height:99px !important;
+    }
+/*  tile background image dimensions */
+.webpartleft div.ms-tileview-tile-content > a > img {
+    width:100% !important;
+    height:100% !important;
+    }
+/*  title and description text  */
+.webpartleft ul.ms-tileview-tile-detailsListMedium {
+    height:100px;
+    padding:4px 7px 7px;
+    font-size:11px;
+    line-height:14px;
+    }
+/*  description text class  */
+.webpartleft li.ms-tileview-tile-descriptionMedium {
+    padding-top:10px;
+    padding-left:2px;
+    font-size:11px;
+    }
+/*  title text when description not shown  */
+.webpartleft div.ms-tileview-tile-titleTextMediumCollapsed {
+    background-color:rgba(0, 0, 0, 0.6);
+    width:198px;
+    height:29px;
+    position:absolute;
+    top:-33px;
+    left:0px;
+    padding:4px 7px 0px 8px;
+    font-size:11px;
+    line-height:13px;
+    }
+.webpartleft .ms-tileview-tile-content img{
+    width:100px!important; 
+    height:100px!important;
+    }  
+/*popular news row height*/
+.connect-homepage-column .cbs-Item {
+	height:5px;
+}
+//sector links
+.connect-sector-link{
+	height:120px;
+}
+.connect-sectorlink-title{
+	bottom:auto; margin-top:40px; 
+	background-color:rgba(12,73,156,0.9); 
+	padding:10px 5px; 
+	max-width:80%;
+}
+.connect-sectorlink-title h2{
+	color:#ffffff;
+}
+#contentRow {
+	width: 74rem !important;
+	overflow-x:hidden;
+}
+
+.ms-comm-tCat-tile{
+	width:105px;
+	height:105px;
+}
+
+.ms-srch-item-path{
+	display:none;
+}
+/*.ms-srch-item{
+	width:700px;
+}*/
+.ms-ref-refiner{
+	background-color:#fff;
+}
+.ms-webpart-titleText span {
+	color:#444;
+}

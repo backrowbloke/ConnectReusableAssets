@@ -1,0 +1,91 @@
+<style>
+    
+</style>
+<script language='javascript'>
+    'use strict';
+    var mobileUtilities = mobileUtilities || {};
+    mobileUtilities.functions = (function() {
+        function registerInMDS() {
+             loadUtilities();
+        }
+        function mdsWait() {
+            SP.SOD.executeOrDelayUntilEventNotified(loadUtilities, 'sp.bodyloaded');
+        }
+
+        function formatDate(date) {
+            return String.format('{0:dd}-{0:MM}-{0:yyyy}',new Date(date));
+        }
+
+        function checkRibbon(){
+
+        }
+
+        function loadUtilities() {
+            try {
+                var widgetsCssLoaded =  jQuery('link[href*="css_babcockmobilewidgets.css"]').length;
+                if (widgetsCssLoaded < 1) {
+                    var corecss = document.createElement('link');
+                    corecss.href = _spPageContextInfo.siteServerRelativeUrl + '/_catalogs/masterpage/Enhancements/mobile/css_babcockmobilewidgets.css';
+                    corecss.type = 'text/css';
+                    corecss.rel = 'stylesheet';
+                    jQuery('head').append(corecss);
+                }
+                var inDesignMode = document.forms[MSOWebPartPageFormName].MSOLayout_InDesignMode.value;
+                if (location.href.toLowerCase().indexOf('ssaedit') > 0) {
+                    inDesignMode = '1';
+                }
+                if (inDesignMode != '1') {
+                    setTimeout(function(){ 
+                            jQuery('#suiteBar').css('visibility','hidden');
+                            jQuery('#suiteBar').hide();
+                            jQuery('#s4-ribbonrow').hide();
+                            jQuery('#s4-ribbonrow').css('visibility','hidden');
+                    }, 4000);
+
+                }
+            }
+            catch(err) {
+                initJSError('loadUtilities()', err);
+            }
+        }
+        
+        function loadUtilitiesError(xhr, status, error) {          
+                initJSError('loadUtilitiesError()', err);
+        }
+        function getSiteUrl() {
+            try {
+                return _spPageContextInfo.siteAbsoluteUrl;
+            }
+            catch(err) {
+                initJSError('getSiteUrl()', err);
+            }
+        }
+        function initJSError(fName, err) {
+            if (typeof console != "undefined") { 
+                console.log('Error in function: ' + fName + '. Message: ' + err); 
+            }
+        }
+        function emptyAndAppend(area, value, empty) {
+            if (empty) { jQuery(area).empty(); }
+            jQuery(area).append(value);
+        }
+        return {
+            registerInMDS: registerInMDS,
+            mdsWait: mdsWait,
+            loadUtilities: loadUtilities
+        };
+    })();
+    if ('undefined' !== typeof g_MinimalDownload && g_MinimalDownload && (window.location.pathname.toLowerCase()).endsWith('/_layouts/15/start.aspx') && 'undefined' !== typeof asyncDeltaManager) {
+        _spBodyOnLoadFunctionNames.push('mobileUtilities.functions.registerInMDS');
+    } else {
+        _spBodyOnLoadFunctionNames.push('mobileUtilities.functions.loadUtilities');
+    }
+</script>
+<div class="row justify-content-center">
+    <div id="connect-servicedesk-container" class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <div class='connect-servicedesk-text connect-servicedesk-title'>IS Service Desk</div>
+        <div class='connect-servicedesk-text'><a href='tel:08000224334'>08000 224 334</a></div>
+        <div class='connect-servicedesk-text'><a href='tel:+441489778700'>+44 1489 778 700</a></div>
+    </div>
+</div>
+

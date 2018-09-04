@@ -1,0 +1,21 @@
+/*.ms-core-listMenu-root li.dynamic-children:nth-child(2) {
+	display:none;
+}*/
+.ms-core-listMenu-root li.dynamic-children:nth-child(2) > ul.dynamic { 
+    text-align: left !important; 
+    width: 300px !important; 
+    
+  }
+.ms-core-listMenu-root li.dynamic-children:nth-child(2) > ul.dynamic > li.dynamic { 
+    display: inline-block; 
+    list-style-type: none; 
+    float: left !important; 
+width:130px;
+  } 
+.ms-core-listMenu-root li.dynamic-children:nth-child(2) > ul.dynamic > li.dynamic:nth-child(odd) { 
+    clear:left;
+
+  }
+.connect-page-tag{
+  display:inline;
+}

@@ -1,0 +1,99 @@
+<script language="javascript">
+	
+	//as this may be on a generic page, write the css link to the header
+	//var cssLink = String.format('<link rel="stylesheet" href="{0}/_catalogs/masterpage/Enhancements/css_babcockportalhome.css" type="text/css"/>',_spPageContextInfo.siteServerRelativeUrl);
+
+	var sitehomebanner = sitehomebanner || {};
+	sitehomebanner.functions = (function() {
+				
+		function registerInMDS() {
+	  //      RegisterModuleInit(_spPageContextInfo.siteServerRelativeUrl + '/_catalogs/masterpage/Enhancements/enhancesitehomebanner.js', sitehomebanner.functions.mdsWait);
+	        loadSiteTitle();
+    }
+    function mdsWait() {
+        SP.SOD.executeOrDelayUntilEventNotified(loadSiteTitle, 'sp.bodyloaded');
+    }
+    
+    function formatDate(date) {
+    	return String.format('{0:dd}-{0:MM}-{0:yyyy}',new Date(date));
+    }
+    
+    ///get query string parameter
+		function getParameterByName(name) {
+		    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+		    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
+		                results = regex.exec(location.search);
+		    return results == null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+		}
+		
+		function loadSiteTitle()
+		{
+			try
+			{
+				var targetUrl = String.format('{0}/_api/web/title',getWebUrl());
+				
+				jQuery.ajax({
+					url: targetUrl,
+					method: 'GET',
+					headers: { 'accept': 'application/json;odata=verbose' },
+					success: loadSiteTitleSuccess,
+					error: loadSiteTitleError
+				});
+			}
+			catch(err) {
+				initJSError('loadSiteTitle()', err);
+			}
+		}
+		function loadSiteTitleSuccess(data) {
+			try {
+				if (data.d.Title.length > 0) {
+					jQuery('.connect-page-title-text h1').text(data.d.Title);
+				}
+			}
+			catch(err) {
+				initJSError('loadSiteTitleSuccess()', err);
+			}
+		}
+		function loadSiteTitleError(err) {
+				initJSError('loadSiteTitleError()', err);
+		}
+		
+		function getWebUrl() {
+			try {
+				if (_spPageContextInfo.webServerRelativeUrl === '/') { return ''; } else { return _spPageContextInfo.webServerRelativeUrl; }
+			}
+			catch(err) {
+				initJSError('getWebUrl()', err);
+			}
+		}
+		function initJSError(fName, err) {	
+			if (typeof console != "undefined") { 
+        console.log('Error in function: ' + fName + '. Message: ' + err); 
+      }
+		}
+		function emptyAndAppend(area, value, empty) {
+			if (empty) { jQuery(area).empty(); }
+			jQuery(area).append(value);
+		}
+		return {
+			registerInMDS: registerInMDS,
+			mdsWait: mdsWait,
+			loadSiteTitle: loadSiteTitle
+		};
+	})();
+	if ('undefined' !== typeof g_MinimalDownload && g_MinimalDownload && (window.location.pathname.toLowerCase()).endsWith('/_layouts/15/start.aspx') && 'undefined' !== typeof asyncDeltaManager) {
+	    _spBodyOnLoadFunctionNames.push('sitehomebanner.functions.registerInMDS');
+	} else {
+	    _spBodyOnLoadFunctionNames.push('sitehomebanner.functions.loadSiteTitle');
+	}
+
+
+</script>
+						
+<div class='connect-page-title' style='background-image: url("../SiteCollectionImages/communityhome.png"); margin-bottom:20px;'> 
+   <div class='connect-page-title-text'> 
+      <h1>Community</h1> 
+      <div class='connect-page-tag'> 
+         <span class='connect-page-tag-accent1'> </span> </div> 
+   </div> 
+</div>

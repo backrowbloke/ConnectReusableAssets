@@ -1,0 +1,62 @@
+  
+/* Reduced size tiles */
+/*  tile row height */
+.connect-col-r div.ms-promlink-body {
+    height:100px;
+    }
+/*  tile dimensions, including inter-tile margin */
+.connect-col-r div.ms-tileview-tile-root {
+    width:105px !important;
+    height:105px !important;
+    }
+/*  tile and title( + description) overlay dimensions */
+.connect-col-r div.ms-tileview-tile-content, .connect-col-r div.ms-tileview-tile-detailsBox {
+    width:99px !important;
+    height:99px !important;
+    }
+/*  tile background image dimensions */
+.connect-col-r div.ms-tileview-tile-content > a > img {
+    width:100%;
+    height:100%;
+    }
+/*  title and description text  */
+.connect-col-r ul.ms-tileview-tile-detailsListMedium {
+    height:100px;
+    padding:4px 7px 7px;
+    font-size:11px;
+    line-height:14px;
+    }
+/*  description text class  */
+.connect-col-r li.ms-tileview-tile-descriptionMedium {
+    padding-top:10px;
+    padding-left:2px;
+    font-size:11px;
+    }
+/*  title text when description not shown  */
+.connect-col-r div.ms-tileview-tile-titleTextMediumCollapsed {
+    background-color:rgba(0, 0, 0, 0.6);
+    width:86px;
+    height:29px;
+    position:absolute;
+    top:-33px;
+    left:0px;
+    padding:4px 7px 0px 8px;
+    font-size:11px;
+    line-height:13px;
+    }
+.connect-col-r .ms-tileview-tile-content img{
+    width:100px!important; 
+    height:100px!important;
+    } 
+.connect-col-r .ms-promlink-header {
+	display:none;
+}
+
+
+/*Promoted Links image style*/
+.connect-col-r .image-area-left img{
+	height:50px;
+	width:50px;
+}
+
+

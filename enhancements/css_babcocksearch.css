@@ -1,0 +1,232 @@
+/*MS Overides*/
+.ms-srch-hover-actions{
+	padding-left:5px;
+	padding-right:5px;
+}
+.ms-srch-item{
+    /*width:600px;*/
+    padding: 0px 0px 0px 10px;
+    /*border: 1px solid #efefef;*/
+}
+.ms-srch-item:hover{
+    background-color:#efefef;
+}
+.ms-srch-hover-action{
+    overflow: visible !important;
+}
+.ms-srch-hover-viewerContainer{
+    border: 1px solid #efefef;
+}
+.ms-srch-hover-outerContainer{
+    /*margin-left:-400px;*/
+}
+.ms-srch-hover-title{
+    width:92%;
+    margin-top:12px;
+    margin-left:10px;
+}
+.ms-srch-item{
+    cursor: pointer;
+    background-color: #ffffff;
+}
+/*End MS*/
+
+.biddetail a, .biddetail a:visited, .biddetail a:hover {
+        text-decoration: none;
+        color: #444444;
+}
+
+.bidpreview{
+    width: 25%;
+    border-right: 1px solid #efefef;
+    padding: 5px;
+    float:left; 
+    height:120px; 
+    margin-right:10px
+}
+.bidpreview img{
+    height:100%;
+    max-width:98%
+}
+.cswptile{
+    height:180px;
+    background-color:#efefef;
+    border:1px solid #efefef;
+    overflow: hidden;
+    max-width: 350px;
+    cursor: pointer;
+    margin-bottom:10px;
+}
+.cswptile a, .cswptile a:hover{
+    text-decoration: none;
+    color:#ffffff;
+}
+
+.cswphover{
+    margin-left:-800px !important;
+    position: absolute;
+    z-index: 1002;
+}
+
+.bidpreviewtile{
+    height:140px;
+    text-align: center !important;
+    padding:3px;
+}
+/*.bidpreviewtile img{
+    height:100%
+}*/
+
+
+.biddetailtile{
+    background-color:rgba( 0,0,0,0.6 );
+    height:38px;
+    color:#ffffff;
+    padding-left: 5px;
+    position: relative;
+    z-index: 10;
+    height:250px;
+    -webkit-transition: margin-top 0.5s;
+    transition: margin-top 0.5s;
+}
+.biddetailtile h3{
+    color:#ffffff;
+    margin-bottom: 10px;
+}
+.biddetailtile:hover{
+    margin-top:-150px;
+}
+.biddetail{
+    float:left; 
+    margin-right:10px;
+}
+.bidactionbutton{
+    background-color: #3FAE29;
+    padding:10px;
+    color: #ffffff !important;
+}
+.relatedsearch{
+    float:left;
+    width:49%;
+
+}
+.relatedsearch ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+/*.relatedsearch:nth-child(2){
+    float:right;
+}*/
+.actionbuttoncontainer{
+    padding-bottom: 5px;
+    border-bottom: solid 1px #efefef;
+
+}
+.actioncontrol{
+    margin-bottom:10px;
+}
+.additionalresult{
+    float:left;
+    width:99%;
+    margin-top:3px;
+
+}
+.additionalresulttext{
+    width:93%;
+}
+.additionalresulttext a, .additionalresulttext a:hover, .additionalresulttext a:visited{
+	color:#000000;
+}
+
+.resultrow {
+    overflow: hidden;
+    /*width:99%;*/
+}
+.resultcol {
+    float: left;
+    padding-bottom: 100%;
+    margin-bottom: -100%;
+    
+}
+
+.contenttypecolor{
+    float:right;
+    width:3%;
+}
+.contenttypeheader{
+    /*color: #ffffff !important;*/
+}
+.casestudy{
+    background-color: #0C499C !important;
+    
+}
+.capabilitysheet{
+    background-color: #899639 !important;
+}
+.detailsitem{
+    float:left;
+}
+.detailslabel{
+    min-width:25%;
+}
+.detailsvalue{
+    margin-left;20px;
+}
+
+.usage{
+    border: 1px solid #e3e3e3;
+    padding: 1px 0px 1px 10px;
+    background-color: #fffcb2;
+    margin: 5px 0px 5px 0px;
+}
+
+.summaryresultsmall{
+    height:75px;
+    width: 300px;
+    margin-left:1px;
+}
+.bidpreviewsmall{
+    height:100%;
+}
+
+.biddetailsmall h3{
+    max-width:180px;
+}
+
+/*Control - List Styles*/
+.cswpcolumn{
+    background-color:#e6ecf5;
+    padding:10px;
+}
+.ms-srch-hover-filetype span {
+	visibility:hidden;
+}
+.hoversummary{
+	border: 1px solid #d1d1d1;
+	padding:5px;
+	margin-bottom:10px;
+}
+.relatedtitle{
+	text-decoration:underline;
+}
+
+.connect-related-search-result {
+	width:300px;
+	display:block;
+	margin-bottom:10px;
+}
+
+.connect-related-search-result .ms-srch-item-body{
+	width:300px;
+	margin-bottom:10px;
+}
+
+.connect-related-search-result .ms-srch-item-link{
+	clear:both;
+	
+}
+.connect-related-search-result .ms-srch-item-path{
+	width:300px;
+	word-wrap:break-word;
+}

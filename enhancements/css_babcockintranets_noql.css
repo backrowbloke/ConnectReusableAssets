@@ -1,0 +1,42 @@
+.ms-dialogHidden {
+	display:none;
+}
+
+#contentBox {
+	margin-left:10px;
+	
+}
+
+.connect-homepage-left, .connect-article-body {
+	width:900px;
+}
+
+.connect-page-title {
+	width:700px;
+}
+
+.connect-homepage-column{
+	background-color:#fff;
+}
+
+.connect-col-wp-third {
+	width:445px;
+	float:left;
+}
+
+.connect-col-wp-third .ms-srch-item {
+	width:440px;
+}
+.connect-col-wp-third .ms-srch-item-path {
+	width:438px !important;
+}
+
+.connect-col-wp-third .connect-webpage-summary {
+	visibility:hidden;
+	display:none;
+}
+
+.connect-col-wp-third .cbs-List, .connect-col-wp-third .ms-srch-result  {
+	min-height:450px;
+}
+
